@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MSMainWindow</class>
+ <widget class="QMainWindow" name="MSMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>442</width>
+    <height>79</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="MultiCheckComboBox" name="msComboBox">
+      <item>
+       <property name="text">
+        <string>India</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Pakistan</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Australia</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>South Africaa</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>West Indies</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>England</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Sri Lanka</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Bangladesh</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="msClickHere">
+      <property name="text">
+       <string>Selected Items</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MultiCheckComboBox</class>
+   <extends>QComboBox</extends>
+   <header>MultiCheckComboBox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

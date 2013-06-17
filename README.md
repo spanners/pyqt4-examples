@@ -1,4 +1,1 @@
-pyqt4-examples
-==============
-
-A repository full of pyqt4 examples -- more for my own learning than anything else
+[PyQt4 Tutorial](http://zetcode.com/tutorials/pyqt4/)
