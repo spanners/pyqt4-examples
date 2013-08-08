@@ -24,8 +24,8 @@ class MultiCheckComboBox(QtGui.QComboBox):
         self._lineEdit = QtGui.QLineEdit()
         self._listView = self.view()
         self._separator = ', '
-        self._defaultText = 'Nothing Selected'
-        self._selectAllText = 'All Selected'
+        self._defaultText = 'Filter Revisions'
+        self._selectAllText = 'Filtering All'
         self._maxTextLength = 42
         self._checkedItems = []
 
@@ -101,7 +101,8 @@ class MultiCheckComboBox(QtGui.QComboBox):
         """
         if self._model.itemData(index, QtCore.Qt.CheckStateRole).toInt():
             return QtCore.Qt.Checked
-            QtCore.Qt.UnChecked
+        else:
+            return QtCore.Qt.UnChecked
 
     def setItemCheckState(self, index, state):
         """ Function to set the check state of the given item.
@@ -169,6 +170,27 @@ class MultiCheckComboBox(QtGui.QComboBox):
                 itemList << mIndex.data().toString()
         return itemList
 
+        
+    def uncheckedItems(self):
+        """ Function to get the checked items label as list.
+
+            Returns:
+                (QStringList) list of item labels.
+        """
+        itemList = QtCore.QStringList()
+        if self._model:
+            modelIndex = self._model.index(0,
+                                            self.modelColumn(),
+                                            self.rootModelIndex())
+            modelIndexList = self._model.match(modelIndex,
+                                                QtCore.Qt.CheckStateRole,
+                                                QtCore.Qt.Unchecked,
+                                                -1,
+                                                QtCore.Qt.MatchExactly)
+            for mIndex in modelIndexList:
+                itemList << mIndex.data().toString()
+        return itemList
+        
     def setCheckedItems(self, items):
         """ Function to set the checked state for the given items.
 
@@ -301,7 +323,7 @@ class MultiCheckComboBox(QtGui.QComboBox):
         return False
 
     def updateCheckedItems(self, index=None, start=None, end=None):
-        """ Slot to update the checkedItems when he dataChanged or
+        """ Slot to update the checkedItems when the dataChanged or
             checkStateChanged Signal emits.
 
             Args:
@@ -309,7 +331,7 @@ class MultiCheckComboBox(QtGui.QComboBox):
                 start (int): Start index of the change
                 end (int): End index of the change
         """
-        itemList = self.checkedItems()
+        itemList = self.checkedItems() + self.uncheckedItems()
         if not len(itemList):
             self.setEditText(self._defaultText)
         elif len(itemList) == self._model.rowCount():
@@ -332,6 +354,8 @@ class MultiCheckComboBox(QtGui.QComboBox):
         else:
             state = QtCore.Qt.Checked
         self.setItemData(index, state, QtCore.Qt.CheckStateRole)
+
+        
 
     def clearAllEvent(self):
         """ Event for clear all check from the list view.
