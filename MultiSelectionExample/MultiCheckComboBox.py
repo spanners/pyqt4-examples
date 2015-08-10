@@ -198,9 +198,9 @@ class MultiCheckComboBox(QtGui.QComboBox):
                 items (QStringList): list of item labels.
         """
         for item in items:
-            index = self.Findtext(item)
+            index = self.findText(item)
             state = QtCore.Qt.Unchecked if index == -1 else QtCore.Qt.Checked
-            self.setItemCheckState(index, state)
+            self.setItemData(index, state, QtCore.Qt.CheckStateRole)
 
     def checkAll(self, check=False):
         """ Function to set all the items as checked or unchecked based on
